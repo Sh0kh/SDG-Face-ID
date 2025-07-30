@@ -2,6 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import React from "react";
 import { Card, Typography } from "@material-tailwind/react";
+import GroupsIcon from "../UI/Icons/Groups";
 
 export default function Sidebar() {
     const [role] = useState("admin");
@@ -25,12 +26,24 @@ export default function Sidebar() {
                 },
             ]
         },
+        {
+            section: "Sozlamalar",
+            items: [
+                {
+                    id: 1,
+                    title: "Guruhlar",
+                    path: "/groups",
+                    icon: (
+                        <GroupsIcon />
+                    )
+                },
+            ]
+        },
 
     ];
 
     return (
         <Card className="h-[95%] w-[280px] fixed top-[15px] left-[15px] z-50 shadow-xl bg-white/30 backdrop-blur-md border border-white/20 px-6 py-6 overflow-y-auto">
-            {/* Header */}
             <div className="flex items-center gap-3 mb-8">
                 <span className="text-xl font-semibold text-gray-800">SDG Face ID</span>
             </div>

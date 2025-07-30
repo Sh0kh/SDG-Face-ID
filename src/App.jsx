@@ -7,6 +7,7 @@ import ProtectedRoute from "./Components/ProtectedRoute"; // Импорт ком
 import Login from "./Components/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Profile from "./Components/Profile/Profile";
+import Groups from "./Components/Groups/Groups";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             }
           >
             <Route path="/" element={<Dashboard />} />
+            <Route path="/groups" element={<Groups />} />
             <Route path="/profil" element={<Profile />} />
           </Route>
           <Route element={<MainLayout />}>
