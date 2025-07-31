@@ -5,33 +5,32 @@ import {
     DialogBody,
     DialogFooter,
     Input,
-    Typography,
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { $api } from "../../../utils";
 import { Alert } from "../../../utils/Alert";
 
-export default function GroupCreate({ refresh }) {
+export default function TaskCreate({ refresh }) {
     const [open, setOpen] = useState(false);
-    const [groupName, setGroupName] = useState("");
+    const [taskName, setTaskName] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleOpen = () => {
         setOpen(!open);
-        setGroupName("");
+        setTaskName("");
     };
 
     const handleSave = async () => {
         setLoading(true);
         try {
-            const NewData = { name: groupName };
-            await $api.post(`/group/create`, NewData);
-            Alert(`Guruh muvaffaqiyatli yaratildi`, "success");
+            const NewData = { name: taskName };
+            await $api.post(`/permission/create`, NewData);
+            Alert(`Vazifa muvaffaqiyatli yaratildi`, "success");
             setOpen(false);
             refresh();
-        } catch (err) {
-            Alert(`Xatolik: ${err.response?.data?.message || `Noma'lum xatolik`}`, "error");
+        } catch (error) {
+            Alert(`Xatolik: ${error.response?.data?.message || `Noma'lum xatolik`}`, "error");
         } finally {
             setLoading(false);
         }
@@ -46,16 +45,16 @@ export default function GroupCreate({ refresh }) {
                 onClick={handleOpen}
             >
                 <PlusIcon className="h-5 w-5" />
-                Yangi guruh qo'shish
+                Yangi vazifa qo'shish
             </Button>
 
             <Dialog open={open} handler={handleOpen}>
-                <DialogHeader>Yangi guruh qo'shish</DialogHeader>
+                <DialogHeader>Yangi vazifa qo'shish</DialogHeader>
                 <DialogBody className="flex flex-col gap-4">
                     <Input
-                        label="Guruh nomi"
-                        value={groupName}
-                        onChange={(e) => setGroupName(e.target.value)}
+                        label="Vazifa nomi"
+                        value={taskName}
+                        onChange={(e) => setTaskName(e.target.value)}
                         required
                     />
                 </DialogBody>
@@ -66,7 +65,7 @@ export default function GroupCreate({ refresh }) {
                     <Button
                         color="blue"
                         onClick={handleSave}
-                        disabled={loading || !groupName.trim()}
+                        disabled={loading || !taskName.trim()}
                         className="flex items-center gap-2"
                     >
                         {loading && (

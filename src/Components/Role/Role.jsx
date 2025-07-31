@@ -6,30 +6,29 @@ import {
     IconButton,
     Tooltip,
 } from "@material-tailwind/react";
-import GroupsIcon from "../UI/Icons/Groups";
-import EyeIcon from "../UI/Icons/EyeIcon";
-import Edit from "../UI/Icons/Edit";
-import Delete from "../UI/Icons/Delete";
-import GroupCreate from "./components/GroupCreate";
 import { $api } from "../../utils";
 import { useEffect, useState } from "react";
 import Loading from "../UI/Loadings/Loading";
-import GroupDelete from "./components/GroupDelete";
-import GroupEdit from "./components/GroupEdit";
+import Task from "../UI/Icons/Tasks";
+import RoleCreate from "./components/RoleCreate";
+import RoleDelete from "./components/RoleDelete";
+import RoleEdit from "./components/RoleEdit";
+import RoleInfo from "./components/RoleInfo";
 
-export default function Groups() {
-    const [groupsData, setGroupsData] = useState([]);
+
+export default function Role() {
+    const [RoleData, setRoleData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const getAllGroups = async () => {
+    const getAllRoles = async () => {
         try {
             setLoading(true);
-            const response = await $api.get(`/group/getAll`, {
+            const response = await $api.get(`/role/getAll`, {
                 headers: {
                     'ngrok-skip-browser-warning': 'true'
                 }
             });
-            setGroupsData(response.data?.object || []);
+            setRoleData(response.data?.object || []);
         } catch (error) {
             console.log(error);
         } finally {
@@ -37,8 +36,10 @@ export default function Groups() {
         }
     }
 
+
+
     useEffect(() => {
-        getAllGroups();
+        getAllRoles();
     }, [])
 
 
@@ -53,18 +54,18 @@ export default function Groups() {
             <Card className="w-full shadow-lg p-4 mb-[20px]">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <GroupsIcon />
+                        <Task />
                         <Typography variant="h5" color="blue-gray">
-                            Guruhlar ro'yxati
+                            Lavozimlar ro'yxati
                         </Typography>
                     </div>
-                    <GroupCreate refresh={getAllGroups} />
+                    <RoleCreate refresh={getAllRoles} />
                 </div>
             </Card>
 
             <Card className="w-full shadow-lg">
                 <CardBody>
-                    {groupsData.length === 0 ? (
+                    {RoleData.length === 0 ? (
                         <div className="text-center h-[400px] flex items-center  justify-center py-8 text-blue-gray-500 font-medium text-sm">
                             Ma'lumot yo'q
                         </div>
@@ -79,14 +80,15 @@ export default function Groups() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {groupsData.map((group, index) => (
-                                        <tr key={group.id} className="border-b hover:bg-blue-50/50 transition">
+                                    {RoleData.map((role, index) => (
+                                        <tr key={role.id} className="border-b hover:bg-blue-50/50 transition">
                                             <td className="px-4 py-3 text-sm text-gray-800">{index + 1}</td>
-                                            <td className="px-4 py-3 text-sm text-gray-800">{group.name}</td>
+                                            <td className="px-4 py-3 text-sm text-gray-800">{role.name}</td>
                                             <td className="px-4 py-3 text-right">
                                                 <div className="flex justify-end gap-2">
-                                                    <GroupEdit data={group} refresh={getAllGroups} />
-                                                    <GroupDelete id={group.id} refresh={getAllGroups} />
+                                                    <RoleInfo data={role?.id} />
+                                                    <RoleEdit data={role?.id} refresh={getAllRoles} />
+                                                    <RoleDelete id={role.id} refresh={getAllRoles} />
                                                 </div>
                                             </td>
                                         </tr>

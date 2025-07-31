@@ -8,6 +8,8 @@ import Login from "./Components/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Profile from "./Components/Profile/Profile";
 import Groups from "./Components/Groups/Groups";
+import Tasks from "./Components/Tasks/Tasks";
+import Role from "./Components/Role/Role";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           >
             <Route path="/" element={<Dashboard />} />
             <Route path="/groups" element={<Groups />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/role" element={<Role />} />
             <Route path="/profil" element={<Profile />} />
           </Route>
           <Route element={<MainLayout />}>

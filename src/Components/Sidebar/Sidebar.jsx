@@ -3,6 +3,8 @@ import { useState } from "react";
 import React from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import GroupsIcon from "../UI/Icons/Groups";
+import Task from "../UI/Icons/Tasks";
+import Role from "../UI/Icons/Role";
 
 export default function Sidebar() {
     const [role] = useState("admin");
@@ -35,6 +37,22 @@ export default function Sidebar() {
                     path: "/groups",
                     icon: (
                         <GroupsIcon />
+                    )
+                },
+                {
+                    id: 2,
+                    title: "Vazifalar",
+                    path: "/tasks",
+                    icon: (
+                        <Task size={6} />
+                    )
+                },
+                {
+                    id: 2,
+                    title: "Lavozimlar",
+                    path: "/role",
+                    icon: (
+                        <Role size={6} />
                     )
                 },
             ]
