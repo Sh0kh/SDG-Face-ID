@@ -5,6 +5,8 @@ import { Card, Typography } from "@material-tailwind/react";
 import GroupsIcon from "../UI/Icons/Groups";
 import Task from "../UI/Icons/Tasks";
 import Role from "../UI/Icons/Role";
+import Attendance from "../UI/Icons/Attendance";
+import User from "../UI/Icons/User";
 
 export default function Sidebar() {
     const [role] = useState("admin");
@@ -24,6 +26,14 @@ export default function Sidebar() {
                             <path strokeLinecap="round" strokeLinejoin="round"
                                 d="M3 9.75L12 3l9 6.75M4.5 10.5v9.75h5.25V15h4.5v5.25H19.5V10.5" />
                         </svg>
+                    )
+                },
+                {
+                    id: 1,
+                    title: "Davomad",
+                    path: "/attendance",
+                    icon: (
+                        <Attendance size={6} />
                     )
                 },
             ]
@@ -53,6 +63,14 @@ export default function Sidebar() {
                     path: "/role",
                     icon: (
                         <Role size={6} />
+                    )
+                },
+                {
+                    id: 2,
+                    title: "Xodimlar",
+                    path: "/users",
+                    icon: (
+                        <User size={6} />
                     )
                 },
             ]
