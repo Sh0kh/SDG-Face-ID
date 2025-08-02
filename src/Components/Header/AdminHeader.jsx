@@ -1,62 +1,99 @@
-import React, { useState, useRef, useEffect } from "react";
-import { LogOut, User, ChevronDown } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { ChevronDown, Bell, User, Settings, LogOut, Menu } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function AdminHeader(props) {
     const navigate = useNavigate();
-    const [openMenu, setOpenMenu] = useState(false);
-    const menuRef = useRef(null);
+    const [openIndex, setOpenIndex] = useState(null);
 
-    const handleLogout = () => {
-        localStorage.clear();
-        navigate("/login");
-    };
+    const modals = [
+        {
+            title: "Profilga o'tish",
+            action: () => navigate("/profil"),
+            btnText: "Profil",
+            icon: <Bell className="w-5 h-5 text-white" />,
 
-    // Закрытие меню при клике вне
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setOpenMenu(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+        },
+        {
+            title: "Bildirishnomalar",
+            action: () => alert("Bildirishnomalar ochildi"),
+            btnText: "Ko'rish",
+            icon: <Menu className="w-5 h-5 text-white" />,
+
+        },
+        {
+            title: "Sozlamalar",
+            action: () => alert("Sozlamalar paneli ochildi"),
+            btnText: "Sozlash",
+            icon: <Settings className="w-5 h-5 text-white" />,
+        },
+        {
+            title: "Chiqish",
+            action: () => {
+                localStorage.clear();
+                navigate("/login");
+            },
+            btnText: "Chiqish",
+            icon: <User className="w-5 h-5 text-white" />,
+        }
+    ];
+
+    const renderMenuBlock = (item, index) => (
+        <div
+            key={index}
+            className="relative flex items-center gap-4"
+            onMouseEnter={() => setOpenIndex(index)}
+            onMouseLeave={() => setOpenIndex(null)}
+        >
+            <div className="flex items-center gap-2 border-x-[#56BA96] border-x-[1px]  hover:bg-[#249B71] p-5 cursor-pointer">
+                {item.icon}
+                <ChevronDown className="w-4 h-4 text-[#068A5B]" />
+            </div>
+
+            {openIndex === index && (
+                <div
+                    className={`absolute top-[60px] w-48 bg-[#249B71] z-50 shadow-lg rounded-b-lg ${index === 0 ? "left-0" : "right-0"
+                        }`}
+                >
+                    <div className="px-4 py-3 text-white text-sm border-b border-white/20">
+                        {item.title}
+                    </div>
+                    <button
+                        onClick={item.action}
+                        className="w-full text-left px-4 py-3 text-sm text-white hover:bg-MainColor transition"
+                    >
+                        {item.btnText}
+                    </button>
+                </div>
+            )}
+            {props.children}
+        </div>
+    );
 
     return (
-        <div className="fixed w-[78%] z-30 top-[10px] flex justify-end items-center mb-6 px-6 py-4 
-            bg-white/30 backdrop-blur-md rounded-2xl border border-white/30 shadow-lg">
-            
-            {/* Profile Avatar & Menu */}
-            <div className="relative flex items-center gap-4" ref={menuRef}>
-                <button
-                    onClick={() => setOpenMenu(!openMenu)}
-                    className="flex items-center gap-2 bg-white/20 hover:bg-white/40 text-gray-800 px-4 py-2 rounded-full border border-white/30 shadow transition text-sm font-medium"
-                >
-                    <User className="w-5 h-5" />
-                    <ChevronDown className="w-4 h-4" />
-                </button>
-
-                {/* Dropdown Menu */}
-                {openMenu && (
-                    <div className="absolute right-0 top-14 w-40 bg-white/90 backdrop-blur-lg border border-white/30 shadow-lg rounded-lg py-2 z-50">
-                        <button
-                            onClick={() => navigate("/profil")}
-                            className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 transition"
-                        >
-                            Profil
-                        </button>
-                        <button
-                            onClick={handleLogout}
-                            className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition"
-                        >
-                            Chiqish
-                        </button>
+        <div className="fixed w-full z-30 top-0 px-6 bg-MainColor">
+            <div className="Container">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <h1 className="text-white text-2xl px-4 font-bold">Logo</h1>
+                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                            Bosh sahifa
+                        </NavLink>
+                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                            Xodimlar
+                        </NavLink>
+                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                            Ish jadvallari
+                        </NavLink>
+                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                            Hisobotlar
+                        </NavLink>
                     </div>
-                )}
-                {props.children}
+
+                    <div className="flex items-center">
+                        {modals.map((item, i) => renderMenuBlock(item, i))}
+                    </div>
+                </div>
             </div>
         </div>
     );
