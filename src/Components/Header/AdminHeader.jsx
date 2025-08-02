@@ -76,18 +76,43 @@ export default function AdminHeader(props) {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
                         <h1 className="text-white text-2xl px-4 font-bold">Logo</h1>
-                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `text-white px-5 py-5 border-b-4 text-sm ${isActive ? "bg-[#249B71]  border-b-[#07885B]" : "hover:bg-[#249B71]"
+                                }`
+                            }
+                        >
                             Bosh sahifa
                         </NavLink>
-                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                        <NavLink
+                            to="/employees"
+                            className={({ isActive }) =>
+                                `text-white px-5 py-5 text-sm ${isActive ? "bg-[#249B71]  border-b-[#07885B]" : "hover:bg-[#249B71]"
+                                }`
+                            }
+                        >
                             Xodimlar
                         </NavLink>
-                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                        <NavLink
+                            to="/schedules"
+                            className={({ isActive }) =>
+                                `text-white px-5 py-5 text-sm ${isActive ? "bg-[#249B71]  border-b-[#07885B]" : "hover:bg-[#249B71]"
+                                }`
+                            }
+                        >
                             Ish jadvallari
                         </NavLink>
-                        <NavLink to="/" className="text-white px-5 py-5 text-sm hover:bg-[#249B71]">
+                        <NavLink
+                            to="/reports"
+                            className={({ isActive }) =>
+                                `text-white px-5 py-5 text-sm ${isActive ? "bg-[#249B71] border-b-4 border-b-[#07885B]" : "hover:bg-[#249B71]"
+                                }`
+                            }
+                        >
                             Hisobotlar
                         </NavLink>
+
                     </div>
 
                     <div className="flex items-center">
