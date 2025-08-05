@@ -115,7 +115,8 @@ export default function Employees() {
   const getSelectedFiltersCount = () => Object.entries(appliedFilters).filter(([k, v]) => k !== 'qidiruv' && v).length;
 
   return (
-    <div className="bg-gray-50  min-h-screen">
+    <div className="Container">
+    <div className="bg-gray-50 pb-6">
       <div className="bg-white border-b border-gray-200">
         <div className="px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -169,7 +170,7 @@ export default function Employees() {
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
                 {["name", "startDate", "department", "position"].map((type) => (
-                  <th key={type} className="px-6 py-4 text-left relative">
+                  <th key={type} className="px-6 py-4 text-left">
                     <FilterHeader
                       label={type}
                       value={currentFilters[type]}
@@ -271,6 +272,7 @@ export default function Employees() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
