@@ -1,5 +1,6 @@
 import { FiArrowLeft, FiSettings, FiPlusCircle, FiEdit2, FiTrash2, FiX } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 const data = [
 	{
@@ -151,9 +152,12 @@ export default function SchedulesDefault() {
 		<div className="Container">
 			<div className="bg-[#fff]  pb-6">
 				<div className="flex items-center gap-2 px-6 pt-4 pb-2">
+					<NavLink to={"/schedules"}>
 					<button className="text-green-500 text-xl mr-1">
 						<FiArrowLeft />
 					</button>
+					</NavLink>
+					
 					<span className="font-normal text-[20px] text-[#424242]">
 						Default Schedule
 					</span>

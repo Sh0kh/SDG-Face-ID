@@ -8,9 +8,9 @@ export default function AdminHeader(props) {
 
     const modals = [
         {
-            title: "Profilga o'tish",
-            action: () => navigate("/profil"),
-            btnText: "Profil",
+            title: "Qoshimcha  Dam olish ",
+            action: () => navigate("/timeoff"),
+            btnText: "Qoshimcha  Dam olish",
             icon: <Bell className="w-5 h-5 text-white" />,
 
         },
