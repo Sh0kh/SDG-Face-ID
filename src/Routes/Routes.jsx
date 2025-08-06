@@ -1,4 +1,5 @@
 import Dashboard from "../Components/Dashboard/Dashboard";
+import Department from "../Components/Department/Department";
 import Employees from "../Components/Employess/Employees";
 import Report from "../Components/Report/Report";
 import Schedules from "../Components/Schedules/Schedules";
@@ -35,6 +36,11 @@ export const routes = [
         name: "Timeoff",
         path: "/timeoff",
         component: <Timeoff />,
+    },
+    {
+        name: "department",
+        path: "/department",
+        component: <Department />,
     },
     
 ]

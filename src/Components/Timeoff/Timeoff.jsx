@@ -1,59 +1,22 @@
 import { useState } from "react";
-import { FiClock, FiCheckCircle, FiXCircle, FiTrash2, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import TimeoffAddModal from "./TimeoffAddModal";
+import MiniSideBar from "../MiniSidebar/MiniSideBarDayOff";
 
-const tabs = [
-    { label: "Kutilmoqda", icon: <FiClock size={18} /> },
-    { label: "Qabul qilingan", icon: <FiCheckCircle size={18} /> },
-    { label: "Rad etilgan", icon: <FiXCircle size={18} /> },
-    { label: "O‘chirilgan", icon: <FiTrash2 size={18} /> },
-];
+
 
 export default function Timeoff() {
-    const [activeTab, setActiveTab] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
 
     return (
         <div className="Container">
-            <div className="flex gap-4 p-4 bg-[#f3f3f3]">
+            <div className="flex gap-4 p-4">
                 {/* Chap menyu */}
-                <div className="w-[320px] bg-white rounded-lg shadow-sm">
-                    <div className="px-6 py-4 text-[17px] font-normal text-[#424242] border-b border-[#ededeb]">
-                        Qo‘shimcha dam olish ro‘yxati
-                    </div>
-                    <ul>
-                        {tabs.map((tab, idx) => (
-                            <li
-                                key={tab.label}
-                                className={`flex items-center gap-3 px-6 py-3 cursor-pointer border-l-4 ${
-                                    activeTab === idx
-                                        ? "bg-[#f7f7e8] border-[#43b649]"
-                                        : "bg-white border-transparent hover:bg-[#fafafa]"
-                                }`}
-                                onClick={() => setActiveTab(idx)}
-                            >
-                                <span
-                                    className={`rounded-full p-1 ${
-                                        activeTab === idx ? "text-[#43b649]" : "text-[#bdbdbd]"
-                                    }`}
-                                >
-                                    {tab.icon}
-                                </span>
-                                <span
-                                    className={`text-[15px] ${
-                                        activeTab === idx ? "text-[#424242]" : "text-[#757575]"
-                                    }`}
-                                >
-                                    {tab.label}
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <MiniSideBar />
                 {/* O'ng kontent */}
                 <div className="flex-1 bg-white rounded-lg shadow-sm p-6">
                     <div className="flex items-center justify-between mb-4">
-                        <div className="text-[18px] font-normal text-[#424242]">{tabs[activeTab].label}</div>
+                        <div className="text-[18px] font-normal text-[#424242]">{"Davom etmoqda "}</div>
                         <div className="flex items-center gap-2">
                             <input
                                 type="text"
